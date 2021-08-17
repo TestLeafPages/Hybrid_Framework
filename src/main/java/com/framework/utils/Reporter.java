@@ -52,9 +52,9 @@ public abstract class Reporter extends DriverInstance {
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
 		htmlReporter.config().setChartVisibilityOnOpen(!true);
 		htmlReporter.config().setTheme(Theme.STANDARD);
-		htmlReporter.config().setDocumentTitle("Bid Proc");
+		htmlReporter.config().setDocumentTitle("Salesforce");
 		htmlReporter.config().setEncoding("utf-8");
-		htmlReporter.config().setReportName("Bid Proc");
+		htmlReporter.config().setReportName("Salesforce");
 		htmlReporter.setAppendExisting(true);
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
@@ -82,7 +82,7 @@ public abstract class Reporter extends DriverInstance {
 			// Start reporting the step and snapshot
 			MediaEntityModelProvider img = null;
 			if (bSnap && !(status.equalsIgnoreCase("INFO") || status.equalsIgnoreCase("skipped")
-					|| status.equalsIgnoreCase("pass"))) {
+					)) {
 				long snapNumber = 100000L;
 				snapNumber = takeSnap();
 				try {
@@ -106,18 +106,7 @@ public abstract class Reporter extends DriverInstance {
 				test.get().info(desc);
 			}
 
-			/*
-			 * Check if there is logs
-			 */
-			/*
-			 * if (!(status.equalsIgnoreCase("skipped") || status.equalsIgnoreCase("INFO")
-			 * || parentTest.get().getModel().getCategoryContext().get(0).getName().
-			 * equalsIgnoreCase("REST"))) { LogEntries jserrors =
-			 * getDriver().manage().logs().get(LogType.BROWSER); for
-			 * (org.openqa.selenium.logging.LogEntry error : jserrors) { if
-			 * (error.getLevel() == Level.SEVERE) {
-			 * test.get().warning("JavaScript Error Found : " + error.getMessage()); } } }
-			 */
+			
 		}
 	}
 
