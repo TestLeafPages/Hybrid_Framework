@@ -4,17 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.logging.Level;
 
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.UnreachableBrowserException;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
-import org.testng.internal.IResultListener2;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -32,7 +26,7 @@ public abstract class Reporter extends DriverInstance {
 	private static final ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
 	private static final ThreadLocal<ExtentTest> test = new ThreadLocal<ExtentTest>();
 	private static final ThreadLocal<String> testName = new ThreadLocal<String>();
-	private static final HashMap<String, Object> JsonString = new HashMap<String, Object>();
+	
 	private String fileName = "result.html";
 	private String pattern = "dd-MMM-yyyy HH-mm-ss";
 
@@ -125,18 +119,7 @@ public abstract class Reporter extends DriverInstance {
 		extent.flush();
 	}
 
-	public void setValue(String key, String value) {
-		JsonString.put(key, value);
-	}
-
-	public void setValue(String key, int value) {
-		JsonString.put(key, value);
-	}
-
-	public Object getValue(String key) {
-		return JsonString.get(key);
-	}
-
+	
 	public String getTestName() {
 		return testName.get();
 	}
