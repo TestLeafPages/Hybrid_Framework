@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -92,7 +93,7 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 			e.printStackTrace();
 		}
 		try {
-			WebDriverWait wait = new WebDriverWait(getDriver(), 20);
+			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
 			reportStep("Element did not appear after 20 seconds", "fail", false);
@@ -542,7 +543,7 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 			setWait();
 			act = new Actions(getDriver());
 			getDriver().manage().window().maximize();
-			getDriver().manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
+			getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(90));
 			getDriver().get(url);
 			reportStep("The Browser Launched in chrome browser with URL " + url, "pass");
 		} catch (Exception e) {
@@ -570,8 +571,8 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 			}
 			setWait();
 			getDriver().manage().window().maximize();
-			getDriver().manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
-			getDriver().manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+			getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(90));
+			getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
 			getDriver().get(url);
 		} catch (WebDriverException e) {
 			e.printStackTrace();
@@ -619,7 +620,7 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 	@Override
 	public WebElement locateElement(String value) {
 		try {
-			WebElement findElementById = getDriver().findElementById(value);
+			WebElement findElementById = getDriver().findElement(By.id(value));
 			return findElementById;
 		} catch (NoSuchElementException e) {
 			reportStep("The Element with locator id Not Found with value: " + value + "\n" + e.getMessage(), "fail");
@@ -885,7 +886,7 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 		}
 
 		try {
-			WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
 			wait.until(ExpectedConditions.invisibilityOf(element));
 		} catch (Exception e) {
 			reportStep("Element did not appear after 10 seconds", "fail", false);

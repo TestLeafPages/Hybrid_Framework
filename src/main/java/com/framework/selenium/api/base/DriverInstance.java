@@ -1,5 +1,7 @@
 package com.framework.selenium.api.base;
 
+import java.time.Duration;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +15,7 @@ public class DriverInstance  {
 	private static final ThreadLocal<WebDriverWait> wait = new  ThreadLocal<WebDriverWait>();
 
 	public void setWait() {
-		wait.set(new WebDriverWait(getDriver(), 30));
+		wait.set(new WebDriverWait(getDriver(), Duration.ofSeconds(30)));
 	}
 
 	public WebDriverWait getWait() {
