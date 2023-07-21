@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -29,21 +28,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.framework.selenium.api.design.Browser;
 import com.framework.selenium.api.design.Element;
 import com.framework.selenium.api.design.Locators;
 import com.framework.utils.Reporter;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 
 public class SeleniumBase extends Reporter implements Browser, Element  {
 	protected Actions act;
 
-	public static String projectId;
-	public static String auctionRef;
-	
 	protected String getAttribute(WebElement ele, String attributeValue) {
 		String val = "";
 		try {
@@ -903,18 +896,6 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 		}
 	}
 
-	public void chooseDate(WebElement ele, String data) {
-		try {
-			getDriver().executeScript("arguments[0].setAttribute('value', '" + data +"')", ele);
-			reportStep("The Data :" + data + " entered Successfully", "pass");
-		} catch (ElementNotInteractableException e) {
-			reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(), "fail");
-		} catch (WebDriverException e) {
-			reportStep("The Element " + ele + " is not Interactable \n" + e.getMessage(), "fail");
-		}
-
-	}
-
 	public void fileUpload(WebElement ele, String data) {
 		try {
 			hoverAndClick(ele);
@@ -978,13 +959,5 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 	public void executeTheScript(String js, WebElement ele) {
 		getDriver().executeScript(js, ele);
 	}
-	
-	public static void generateProjectAndAuctionIds() {
-		int ranNum1 = (int) (Math.random() * 10000);
-		int ranNum2 = ranNum1+9999;
-		projectId = Integer.toString(ranNum1);
-		auctionRef = Integer.toString(ranNum2);
-	}
-
-	
+			
 }
