@@ -35,9 +35,9 @@ import com.framework.utils.Reporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SeleniumBase extends Reporter implements Browser, Element  {
-	protected Actions act;
+	public  Actions act;
 
-	protected String getAttribute(WebElement ele, String attributeValue) {
+	public String getAttribute(WebElement ele, String attributeValue) {
 		String val = "";
 		try {
 			val = ele.getAttribute(attributeValue);
@@ -47,33 +47,33 @@ public class SeleniumBase extends Reporter implements Browser, Element  {
 		return val;
 	}
 
-	protected void moveToElement(WebElement ele) {
+	public void moveToElement(WebElement ele) {
 		act = new Actions(getDriver());
 		act.moveToElement(ele).perform();
 	}
 	
-	protected void dragAndDrop(WebElement eleSoutce, WebElement eleTarget) {
+	public void dragAndDrop(WebElement eleSoutce, WebElement eleTarget) {
 		act = new Actions(getDriver());
 		act.dragAndDrop(eleSoutce, eleTarget).perform();
 	}
 
-	protected void contextClick(WebElement ele) {
+	public void contextClick(WebElement ele) {
 		act = new Actions(getDriver());
 		act.contextClick(getWait().until(ExpectedConditions.elementToBeClickable(ele))).perform();
 	}
 
-	protected void hoverAndClick(WebElement ele) {
+	public void hoverAndClick(WebElement ele) {
 		act = new Actions(getDriver());
 		act.moveToElement(getWait().until(ExpectedConditions.elementToBeClickable(ele))).pause(5000).click().perform();
 	}
 
-	protected void doubleTap(WebElement ele) {
+	public void doubleTap(WebElement ele) {
 		act = new Actions(getDriver());
 		act.click(getWait().until(ExpectedConditions.elementToBeClickable(ele))).click().perform();
 		reportStep("Element moved", "info");
 	}
 
-	protected void doubleClick(WebElement ele) {
+	public void doubleClick(WebElement ele) {
 		act = new Actions(getDriver());
 		act.doubleClick(getWait().until(ExpectedConditions.elementToBeClickable(ele))).perform();
 		reportStep("Element double clicked", "info");
